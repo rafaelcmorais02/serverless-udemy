@@ -13,12 +13,12 @@ provider:
   region: sa-east-1
 
 functions:
-  hello:
-    handler: src/handlers/hello.handler
+  guestRegister:
+    handler: src/handlers/guestRegister.handler
     events:
       - http:
-          method: GET
-          path: /hello
+          method: POST
+          path: /guest
 
 custom:
   bundle:
