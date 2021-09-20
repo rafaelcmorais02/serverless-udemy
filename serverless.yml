@@ -9,8 +9,9 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 256
-  stage: ${opt:stage, 'dev'}
-  
+  stage: ${opt:stage, 'dev'} #if this variable is undefined, use dev as default
+  region: sa-east-1
+
 functions:
   hello:
     handler: src/handlers/hello.handler
@@ -18,3 +19,7 @@ functions:
       - http:
           method: GET
           path: /hello
+
+custom:
+  bundle:
+    linting: false #added
