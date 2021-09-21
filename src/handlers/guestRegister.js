@@ -9,14 +9,14 @@ async function guestRegister(event, context) {
   const now = new Date()
 
   const guest = {
-    id: uuid(),
+    id: uuid(), //Automaticamente cria um unique id
     name,
     age,
     gender,
     invitedBy,
     email,
     phone,
-    createdAt: now.toISOString(), //standard way to store dates into a database
+    createdAt: now.toISOString(), //Foramto standard para armazenar datas em um banco de dados
   }
 
   await dynamoDb.put({

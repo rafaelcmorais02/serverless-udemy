@@ -3,14 +3,20 @@ service:
 
 plugins:
   - serverless-bundle
-  - serverless-pseudo-parameters
+  - serverless-pseudo-parameters #Permite declarar variáveis com informações da AWS
 
 provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 256
-  stage: ${opt:stage, 'dev'} #if this variable is undefined, use dev as default
+  stage: ${opt:stage, 'dev'} #Se não especificado nenhum stage usar dev como default
   region: sa-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem #Permite gravações dentro do DynamoDB
+      Resource:
+        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/GuestTable #ARN (amazon resource name) da tabela
 
 resources:
   Resources:
@@ -23,8 +29,8 @@ resources:
           - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: id
-            KeyType: HASH
+          - AttributeName: id #primary key
+            KeyType: HASH #unique
 
 functions:
   guestRegister:
