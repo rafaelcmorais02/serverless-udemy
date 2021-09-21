@@ -12,6 +12,20 @@ provider:
   stage: ${opt:stage, 'dev'} #if this variable is undefined, use dev as default
   region: sa-east-1
 
+resources:
+  Resources:
+    GuestTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: GuestTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
 functions:
   guestRegister:
     handler: src/handlers/guestRegister.handler
