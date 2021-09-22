@@ -11,11 +11,15 @@ provider:
   memorySize: 256
   stage: ${opt:stage, 'dev'} #Se não especificado nenhum stage usar dev como default
   region: sa-east-1
+  environment:
+    GUEST_TABLE_NAME: ${self:custom.GuestTable.name}
   iamRoleStatements:
     - ${file(iam/GuestTableIAM.yml):GuestTableIAM} #Importa o arquivo e especifíca o objeto GuestTableIAM
+
 resources:
   Resources:
     GuestTable: ${file(resources/GuestTable.yml):GuestTable} #Importa o arquivo o objeto GuestTable
+
 functions:
   guestRegister:
     handler: src/handlers/guestRegister.handler
@@ -25,5 +29,8 @@ functions:
           path: /guest
 
 custom:
+  GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
+    name: !Ref GuestTable
+    arn: !GetAtt GuestTable.Arn
   bundle:
-    linting: false #added
+    linting: false #é desaconselhável usar esse parâmetro como false

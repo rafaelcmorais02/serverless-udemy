@@ -1,7 +1,7 @@
 GuestTable:
   Type: AWS::DynamoDB::Table
   Properties:
-    TableName: GuestTable
+    TableName: GuestTable-${self:provider.stage} #Adiciona o estágio no nome da tabela
     BillingMode: PAY_PER_REQUEST
     AttributeDefinitions:
       - AttributeName: id

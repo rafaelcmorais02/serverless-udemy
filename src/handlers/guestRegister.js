@@ -20,7 +20,7 @@ async function guestRegister(event, context) {
   }
 
   await dynamoDb.put({
-    TableName: "GuestTable",
+    TableName: process.env.GUEST_TABLE_NAME,
     Item: guest,
   }).promise()
 
