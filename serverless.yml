@@ -12,26 +12,10 @@ provider:
   stage: ${opt:stage, 'dev'} #Se não especificado nenhum stage usar dev como default
   region: sa-east-1
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:PutItem #Permite gravações dentro do DynamoDB
-      Resource:
-        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/GuestTable #ARN (amazon resource name) da tabela
-
+    - ${file(iam/GuestTableIAM.yml):GuestTableIAM} #Importa o arquivo e especifíca o objeto GuestTableIAM
 resources:
   Resources:
-    GuestTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: GuestTable
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id #primary key
-            KeyType: HASH #unique
-
+    GuestTable: ${file(resources/GuestTable.yml):GuestTable} #Importa o arquivo o objeto GuestTable
 functions:
   guestRegister:
     handler: src/handlers/guestRegister.handler

@@ -1,0 +1,6 @@
+GuestTableIAM:
+  Effect: Allow
+  Action:
+    - dynamodb:PutItem #Permite gravações dentro do DynamoDB
+  Resource:
+    - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/GuestTable #ARN (amazon resource name) da tabela
