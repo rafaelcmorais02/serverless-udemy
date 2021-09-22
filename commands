@@ -2,3 +2,5 @@ sls deploy --aws-profile rafael -s dev -v [deploy]
 sls remove --aws-profile rafael -s dev -v [remove]
 sls create --name wedding-sls --template-url https://github.com/codingly-io/sls-base [template]
 npm install uuid (create an unique id)
+npm install @middy/core @middy/http-event-normalizer @middy/http-error-handler @middy/http-json-body-parser
+npm install http-errors
