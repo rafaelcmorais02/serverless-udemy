@@ -28,6 +28,13 @@ functions:
           method: POST
           path: /guest
 
+  getGuests:
+    handler: src/handlers/getGuests.handler
+    events:
+      - http:
+          method: GET
+          path: /guests
+
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable

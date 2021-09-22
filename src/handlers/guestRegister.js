@@ -29,8 +29,7 @@ async function guestRegister(event, context) {
       TableName: process.env.GUEST_TABLE_NAME,
       Item: guest,
     }).promise()
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error)
     throw new createError.InternalServerError(error)
   }
