@@ -35,6 +35,13 @@ functions:
           method: GET
           path: /guests
 
+  getGuest:
+    handler: src/handlers/getGuest.handler
+    events:
+      - http:
+          method: GET
+          path: /guest/{id}
+
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable

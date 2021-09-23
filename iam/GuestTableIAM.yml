@@ -3,5 +3,6 @@ GuestTableIAM:
   Action:
     - dynamodb:PutItem #Permite gravações dentro do DynamoDB
     - dynamodb:Scan #Permite scan dentro do DynamoDB
+    - dynamodb:GetItem #Permite queries dentro do DynamoDB
   Resource:
     - ${self:custom.GuestTable.arn} #ARN (amazon resource name) da tabela
