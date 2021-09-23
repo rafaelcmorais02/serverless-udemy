@@ -1,9 +1,6 @@
 import { v4 as uuid } from "uuid"
 import AWS from "aws-sdk"
-import middy from "@middy/core"
-import httpJsonBodyParser from "@middy/http-json-body-parser"
-import httpEventNormalizer from "@middy/http-event-normalizer"
-import httpErrorHandler from "@middy/http-error-handler"
+import commomMiddleware from "../lib/commomMiddleware";
 import createError from "http-errors"
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -40,9 +37,5 @@ async function guestRegister(event, context) {
   };
 }
 
-export const handler = middy(guestRegister)
-  .use(httpJsonBodyParser()) //automaticamente ele faz o parse no nosso evento json
-  .use(httpEventNormalizer()) //ajusta o evento no API GAteway para evitar objetos que não existem 
-  .use(httpErrorHandler()) //ajuda a lidar com erros
-
+export const handler = commomMiddleware(guestRegister)
 
