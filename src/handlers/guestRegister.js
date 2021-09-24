@@ -2,14 +2,20 @@ import { v4 as uuid } from "uuid"
 import AWS from "aws-sdk"
 import commomMiddleware from "../lib/commomMiddleware";
 import createError from "http-errors"
+import { getByGuestEmail } from "../utils/utilFunctions";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 async function guestRegister(event, context) {
 
   const { guestName, age, gender, invitedBy, email, phone } = event.body
-  const now = new Date()
 
+  const guestEmail = await getByGuestEmail(email)
+  if (guestEmail.length > 0) {
+    throw new createError.BadRequest(`Email ${email} já cadastrado`)
+  }
+
+  const now = new Date()
   const guest = {
     id: uuid(), //Automaticamente cria um unique id
     guestName,
@@ -30,7 +36,6 @@ async function guestRegister(event, context) {
     console.error(error)
     throw new createError.InternalServerError(error)
   }
-
   return {
     statusCode: 201,
     body: JSON.stringify({ guest }),
