@@ -1,14 +1,22 @@
 import AWS from "aws-sdk"
 import commomMiddleware from "../lib/commomMiddleware";
 import createError from "http-errors"
+<<<<<<< HEAD
 import { getGuestById } from "../utils/utilFunctions";
+=======
+import { getGuestById } from "./getGuest";
+>>>>>>> c526f6bc6d5c1ef0df458274a9fd5f7713f73536
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 async function updateGuest(event, context) {
 
     const { id } = event.pathParameters
+<<<<<<< HEAD
     const { guestName, age, gender, invitedBy, phone } = event.body
+=======
+    const { guestName, age, gender, invitedBy, email, phone } = event.body
+>>>>>>> c526f6bc6d5c1ef0df458274a9fd5f7713f73536
 
     const guest = await getGuestById(id)
     if (!guest) {
