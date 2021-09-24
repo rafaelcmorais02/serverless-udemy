@@ -1,6 +1,5 @@
 import AWS from "aws-sdk"
 import commomMiddleware from "../lib/commomMiddleware";
-import createError from "http-errors"
 import { getGuestById } from "../utils/utilFunctions";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();

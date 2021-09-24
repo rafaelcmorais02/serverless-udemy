@@ -2,7 +2,7 @@ import AWS from "aws-sdk"
 import createError from "http-errors"
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-export async function getByGuestEmail(email) {
+export async function getGuestByEmail(email) {
   let guest
   try {
 
