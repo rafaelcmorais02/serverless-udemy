@@ -4,12 +4,11 @@ import createError from "http-errors"
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-async function getGuest(event, context) {
+export async function getGuestById(id) {
     let guest
-    const { id } = event.pathParameters
 
     try {
-        const result = guest = await dynamoDb.get({
+        const result = await dynamoDb.get({
             TableName: process.env.GUEST_TABLE_NAME,
             Key: { id }
         }).promise()
@@ -23,6 +22,23 @@ async function getGuest(event, context) {
     if (!guest) {
         throw new createError.NotFound(`Guest with ID ${id} was not found`)
     }
+    return guest
+}
+
+export async function getGuestByEmail(email) {
+    let guest
+    try {
+
+    } catch (error) {
+        console.error(error)
+        throw new createError.InternalServerError(error)
+    }
+}
+
+async function getGuest(event, context) {
+
+    const { id } = event.pathParameters
+    const guest = await getGuestById(id)
 
     return {
         statusCode: 200,
