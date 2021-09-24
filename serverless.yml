@@ -56,6 +56,11 @@ functions:
           method: DELETE
           path: /guest/{id}/delete
 
+  notifyGuests:
+    handler: src/sweeper/notifyGuests.handler
+    events:
+      - schedule: rate(1 day)
+
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable
