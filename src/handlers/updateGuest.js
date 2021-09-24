@@ -3,12 +3,15 @@ import commomMiddleware from "../lib/commomMiddleware";
 import createError from "http-errors"
 import { getGuestById } from "../utils/utilFunctions";
 
+
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 async function updateGuest(event, context) {
 
     const { id } = event.pathParameters
+
     const { guestName, age, gender, invitedBy, phone } = event.body
+
 
     const guest = await getGuestById(id)
     if (!guest) {

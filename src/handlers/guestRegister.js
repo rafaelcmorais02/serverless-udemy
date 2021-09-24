@@ -6,11 +6,31 @@ import { getByGuestEmail } from "../utils/utilFunctions";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
+async function getGuestEmail(email) {
+  let guest
+  try {
+
+    const result = await dynamoDb.scan({
+      TableName: process.env.GUEST_TABLE_NAME,
+      FilterExpression: "email =:email",
+      ExpressionAttributeValues: {
+        ":email": email
+      }
+    }).promise()
+    guest = result.Items
+  } catch (error) {
+    console.error(error)
+    throw new createError.InternalServerError(error)
+  }
+  return guest
+}
+
 async function guestRegister(event, context) {
 
   const { guestName, age, gender, invitedBy, email, phone } = event.body
 
   const guestEmail = await getByGuestEmail(email)
+
   if (guestEmail.length > 0) {
     throw new createError.BadRequest(`Email ${email} já cadastrado`)
   }
