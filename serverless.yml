@@ -49,6 +49,13 @@ functions:
           method: PATCH
           path: /guest/{id}/update
 
+  deleteGuest:
+    handler: src/handlers/deleteGuest.handler
+    events:
+      - http:
+          method: DELETE
+          path: /guest/{id}/delete
+
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable
