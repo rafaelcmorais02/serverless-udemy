@@ -7,12 +7,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 async function guestRegister(event, context) {
 
-  const { name, age, gender, invitedBy, email, phone } = event.body
+  const { guestName, age, gender, invitedBy, email, phone } = event.body
   const now = new Date()
 
   const guest = {
     id: uuid(), //Automaticamente cria um unique id
-    name,
+    guestName,
     age,
     gender,
     invitedBy,

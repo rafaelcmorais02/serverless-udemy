@@ -42,6 +42,13 @@ functions:
           method: GET
           path: /guest/{id}
 
+  updateGuest:
+    handler: src/handlers/updateGuest.handler
+    events:
+      - http:
+          method: PATCH
+          path: /guest/{id}/update
+
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable
