@@ -2,6 +2,29 @@ import AWS from "aws-sdk"
 import createError from "http-errors"
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
+export async function guetGuestEmailGSI(email) {
+  let guest
+  const params = {
+    TableName: process.env.GUEST_TABLE_NAME,
+    IndexName: "getGuestEmail",
+    KeyConditionExpression: "email =:email",
+    ExpressionAttributeValues: {
+      ":email": email
+    }
+  }
+
+  try {
+    const result = await dynamoDb.query(params).promise()
+    guest = result.Items
+  } catch (error) {
+    console.error(error)
+    throw new createError.InternalServerError(error)
+  }
+
+  return guest
+}
+
 export async function getGuestByEmail(email) {
   let guest
   try {

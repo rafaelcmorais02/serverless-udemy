@@ -12,7 +12,7 @@ GuestTable:
       - AttributeName: id #primary key
         KeyType: HASH #unique
     GlobalSecondaryIndexes:
-      - IndexName: getGuestByEmail
+      - IndexName: getGuestEmail
         KeySchema:
           - AttributeName: email
             KeyType: HASH

@@ -6,5 +6,7 @@ GuestTableIAM:
     - dynamodb:GetItem #Permite queries dentro do DynamoDB
     - dynamodb:UpdateItem #Permite PATCH nos dados do DynamoDB
     - dynamodb:DeleteItem #Permite deletar item no DynamoDB
+    - dynamodb:Query #Permite pesquisa dentro do DynamoDB
   Resource:
     - ${self:custom.GuestTable.arn} #ARN (amazon resource name) da tabela
+    - !Join ["/", ["${self:custom.GuestTable.arn}", index, "getGuestEmail"]] #Permite habilitar os recursos para a tabela virsual (GSI)
