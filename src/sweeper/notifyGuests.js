@@ -22,7 +22,8 @@ async function notifyGuests(event, context) {
         diff.push(parseInt(((((now - createdAt) / 1000) / 60) / 60) / 24))
         email.push(guest.email)
     }
-
+    console.log(`Esses são os emails: ${email}`)
+    console.log(`Essas são as diferenças: ${diff}`)
 }
 export const handler = notifyGuests
 
