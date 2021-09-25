@@ -6,6 +6,15 @@ GuestTable:
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
+      - AttributeName: email #To create a Global Secondary Index (GSI)
+        AttributeType: S
     KeySchema:
       - AttributeName: id #primary key
         KeyType: HASH #unique
+    GlobalSecondaryIndexes:
+      - IndexName: getGuestByEmail
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
