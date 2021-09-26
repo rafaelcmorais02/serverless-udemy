@@ -19,6 +19,15 @@ provider:
 resources:
   Resources:
     GuestTable: ${file(resources/GuestTable.yml):GuestTable} #Importa o arquivo o objeto GuestTable
+    GatewayResponseDefault4XX:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
 
 functions:
   guestRegister:
@@ -27,6 +36,7 @@ functions:
       - http:
           method: POST
           path: /guest
+          cors: true
 
   getGuests:
     handler: src/handlers/getGuests.handler
@@ -34,6 +44,7 @@ functions:
       - http:
           method: GET
           path: /guests
+          cors: true
 
   getGuest:
     handler: src/handlers/getGuest.handler
@@ -41,6 +52,7 @@ functions:
       - http:
           method: GET
           path: /guest/{id}
+          cors: true
 
   updateGuest:
     handler: src/handlers/updateGuest.handler
@@ -48,6 +60,7 @@ functions:
       - http:
           method: PATCH
           path: /guest/{id}/update
+          cors: true
 
   deleteGuest:
     handler: src/handlers/deleteGuest.handler
@@ -55,6 +68,7 @@ functions:
       - http:
           method: DELETE
           path: /guest/{id}/delete
+          cors: true
 
   notifyGuests:
     handler: src/sweeper/notifyGuests.handler

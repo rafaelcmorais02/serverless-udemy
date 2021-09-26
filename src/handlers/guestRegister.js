@@ -39,7 +39,11 @@ async function guestRegister(event, context) {
     throw new createError.InternalServerError(error)
   }
   return {
-    statusCode: 201,
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
     body: JSON.stringify({ guest }),
   };
 }
