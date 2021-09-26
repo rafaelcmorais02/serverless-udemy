@@ -27,6 +27,7 @@ functions:
       - http:
           method: POST
           path: /guest
+          cors: true
 
   getGuests:
     handler: src/handlers/getGuests.handler
