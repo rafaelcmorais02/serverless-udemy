@@ -14,7 +14,14 @@ async function guestRegister(event, context) {
   const guestEmail = await guetGuestEmailGSI(email)
 
   if (guestEmail.length > 0) {
-    throw new createError.BadRequest(`Email ${email} já cadastrado`)
+    return {
+      statusCode: 400,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': true,
+      },
+      body: JSON.stringify({ error: "email já cadastrado" }),
+    }
   }
 
   const now = new Date()
