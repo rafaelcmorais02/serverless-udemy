@@ -1,0 +1,10 @@
+https://manage.auth0.com/
+
+
+curl --location --request POST 'https://dev-vf91vp4g.us.auth0.com/oauth/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=1VSaFISO2A9F4iSZrbp6O3MLYVgf95yM' \
+--data-urlencode 'username=' \
+--data-urlencode 'password=' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'scope=openid'
