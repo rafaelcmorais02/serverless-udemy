@@ -18,7 +18,7 @@ provider:
 
 resources:
   Resources:
-    GuestTable: ${file(resources/GuestTable.yml):GuestTable} #Importa o arquivo o objeto GuestTable
+    GuestTable: ${file(resources/GuestTable.yml):GuestTable} #Importa do arquivo o objeto GuestTable
     GatewayResponseDefault4XX:
       Type: "AWS::ApiGateway::GatewayResponse"
       Properties:
