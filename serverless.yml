@@ -32,6 +32,7 @@ resources:
 functions: ${file(functions/functions.yml):functions}
 
 custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:serverless-auth0-authorizer-${self:provider.stage}-auth
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable
     arn: !GetAtt GuestTable.Arn

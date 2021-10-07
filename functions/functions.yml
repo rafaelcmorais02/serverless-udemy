@@ -5,6 +5,7 @@ functions:
       - http:
           method: POST
           path: /guest
+          authorizer: ${self:custom.authorizer}
           cors: true
 
   getGuests:
