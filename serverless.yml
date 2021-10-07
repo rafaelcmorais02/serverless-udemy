@@ -29,51 +29,7 @@ resources:
         RestApiId:
           Ref: "ApiGatewayRestApi"
 
-functions:
-  guestRegister:
-    handler: src/handlers/guestRegister.handler
-    events:
-      - http:
-          method: POST
-          path: /guest
-          cors: true
-
-  getGuests:
-    handler: src/handlers/getGuests.handler
-    events:
-      - http:
-          method: GET
-          path: /guests
-          cors: true
-
-  getGuest:
-    handler: src/handlers/getGuest.handler
-    events:
-      - http:
-          method: GET
-          path: /guest/{id}
-          cors: true
-
-  updateGuest:
-    handler: src/handlers/updateGuest.handler
-    events:
-      - http:
-          method: PATCH
-          path: /guest/{id}/update
-          cors: true
-
-  deleteGuest:
-    handler: src/handlers/deleteGuest.handler
-    events:
-      - http:
-          method: DELETE
-          path: /guest/{id}/delete
-          cors: true
-
-  notifyGuests:
-    handler: src/sweeper/notifyGuests.handler
-    events:
-      - schedule: rate(1 day)
+functions: ${file(functions/functions.yml):functions}
 
 custom:
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy

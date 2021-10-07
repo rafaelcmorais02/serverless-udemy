@@ -1,0 +1,32 @@
+functions:
+  guestRegister:
+    handler: src/handlers/guestRegister.handler
+    events:
+      - http:
+          method: POST
+          path: /guest
+          cors: true
+
+  getGuests:
+    handler: src/handlers/getGuests.handler
+    events:
+      - http:
+          method: GET
+          path: /guests
+          cors: true
+
+  getGuest:
+    handler: src/handlers/getGuest.handler
+    events:
+      - http:
+          method: GET
+          path: /guest/{id}
+          cors: true
+
+  updateGuest:
+    handler: src/handlers/updateGuest.handler
+    events:
+      - http:
+          method: PATCH
+          path: /guest/{id}/update
+          cors: true
