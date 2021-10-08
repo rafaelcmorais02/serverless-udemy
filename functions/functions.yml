@@ -1,11 +1,14 @@
 functions:
+  serverlessAuthTest:
+    handler: src/auth/serverlessAuthTest.handler
+
   guestRegister:
     handler: src/handlers/guestRegister.handler
     events:
       - http:
           method: POST
           path: /guest
-          authorizer: ${self:custom.authorizer}
+          authorizer: serverlessAuthTest
           cors: true
 
   getGuests:

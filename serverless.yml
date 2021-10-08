@@ -13,6 +13,7 @@ provider:
   region: sa-east-1
   environment:
     GUEST_TABLE_NAME: ${self:custom.GuestTable.name}
+    AUTH_TEST: ${file(credential/auth.json):key}
   iamRoleStatements:
     - ${file(iam/GuestTableIAM.yml):GuestTableIAM} #Importa o arquivo e especifíca o objeto GuestTableIAM
 
@@ -29,10 +30,20 @@ resources:
         RestApiId:
           Ref: "ApiGatewayRestApi"
 
+    AuthFailureGatewayResponse:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+        StatusCode: "401"
+
 functions: ${file(functions/functions.yml):functions}
 
 custom:
-  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:serverless-auth0-authorizer-${self:provider.stage}-auth
   GuestTable: #o nome da tabela assim como o arn serão informados quando houver o deploy
     name: !Ref GuestTable
     arn: !GetAtt GuestTable.Arn
