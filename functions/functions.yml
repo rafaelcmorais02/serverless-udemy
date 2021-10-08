@@ -8,7 +8,9 @@ functions:
       - http:
           method: POST
           path: /guest
-          authorizer: serverlessAuthTest
+          authorizer:
+            name: serverlessAuthTest
+            identitySource: method.request.header.x-api-key
           cors: true
 
   getGuests:

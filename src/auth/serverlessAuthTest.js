@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { stringify } from 'uuid';
 
 const generatePolicy = (principalId, methodArn) => {
     const apiGatewayWildcard = methodArn.split('/', 2).join('/') + '/*';
@@ -21,7 +22,7 @@ export async function handler(event, context) {
     if (!event.authorizationToken) {
         throw 'Unauthorized';
     }
-    const token = event.authorizationToken.replace('Bearer ', '');
+    const token = event.authorizationToken
 
     try {
         const claims = jwt.verify(token, process.env.AUTH_TEST);

@@ -7,7 +7,7 @@ import { getGuestByEmail, guetGuestEmailGSI } from "../utils/utilFunctions";
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 async function guestRegister(event, context) {
-
+  console.log(JSON.stringify(event))
   const { guestName, age, gender, invitedBy, email, phone } = event.body
 
   // const guestEmail = await getGuestByEmail(email)
