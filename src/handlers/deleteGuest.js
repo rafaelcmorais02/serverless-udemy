@@ -28,7 +28,7 @@ async function deleteGuest(event, context) {
 
     return {
         statusCode: 200,
-        body: JSON.stringify({}),
+        body: JSON.stringify({ message: "convidado deletado com sucesso" }),
     };
 }
 

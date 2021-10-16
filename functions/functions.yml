@@ -19,6 +19,9 @@ functions:
       - http:
           method: GET
           path: /guests
+          authorizer:
+            name: serverlessAuthTest
+            identitySource: method.request.header.x-api-key
           cors: true
 
   getGuest:
@@ -27,6 +30,9 @@ functions:
       - http:
           method: GET
           path: /guest/{id}
+          authorizer:
+            name: serverlessAuthTest
+            identitySource: method.request.header.x-api-key
           cors: true
 
   updateGuest:
@@ -35,4 +41,18 @@ functions:
       - http:
           method: PATCH
           path: /guest/{id}/update
+          authorizer:
+            name: serverlessAuthTest
+            identitySource: method.request.header.x-api-key
+          cors: true
+
+  deleteGuest:
+    handler: src/handlers/deleteGuest.handler
+    events:
+      - http:
+          method: DELETE
+          path: /guest/{id}/delete
+          authorizer:
+            name: serverlessAuthTest
+            identitySource: method.request.header.x-api-key
           cors: true
